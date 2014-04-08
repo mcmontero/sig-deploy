@@ -1,14 +1,30 @@
 sig-deploy - Software Deployment System for AWS
 
-HOW TO
-======
+sig-deploy.sh
+=============
 
-    - Create as many configuration files as you need by customizing
+    sig-deploy.sh usage: [Path to Config File] {Payload}
+
+    * Create as many configuration files as necessary by customizing
       conf/sample.conf.
 
-    - Execute sig-deploy.sh on any server that has access to the s3cmd command
-      and your configuration file.
+    * The configuration file you create will be used on both the machine
+      from which you deploy and the hosts onto which you are deploying.
 
-    - Add a crontab entry for exec-deploy.sh on each server that needs to
-      process signals to deploy code.  Depending on your configuration you may
-      need to add the crontab for root (but preferably not).
+    * Execute sig-deploy.sh from any server that has access to the s3cmd
+      command and its configuration file.  This can be your desktop or a
+      dedicated deployment server inside of EC2.
+
+    * The payload (second parameter) can be any arbitrary stuff that you want
+      passed to the script you have configured for post_action.
+
+exec-deploy.sh
+==============
+
+    exec-deploy.sh usage: [Path to Config File]
+
+    * Create a crontab entry on all of the hosts onto which you want to deploy
+      new software using this system.
+
+    * The path for the configuration file should be the exact same one you used
+      when you called sig-deploy.sh.
