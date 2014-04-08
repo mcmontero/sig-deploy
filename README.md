@@ -1,5 +1,4 @@
-sig-deploy
-Software Deployment System for AWS
+sig-deploy - Software Deployment System for AWS
 
 HOW TO
 ======
