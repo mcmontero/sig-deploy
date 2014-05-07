@@ -149,7 +149,7 @@ then
         /bin/echo "    $path"
         /bin/echo "    output from git pull command is:"
         /bin/echo "--------------------"
-        ("$as_user cd $path; /usr/bin/git pull")
+        (${as_user}"cd $path; /usr/bin/git pull")
         if [ "$?" -ne 0 ];
         then
             /bin/echo "--------------------"
