@@ -138,12 +138,18 @@ if [ ${#paths[@]} -ne 0 ];
 then
     /bin/echo "+ Updating git repositories..."
 
+    as_user=''
+    if [ ! -z $user];
+    then
+        as_user="su - $user -c"
+    fi
+
     for path in "${paths[@]}"
     do
         /bin/echo "    $path"
         /bin/echo "    output from git pull command is:"
         /bin/echo "--------------------"
-        (su - nobody -c "cd $path; /usr/bin/git pull")
+        ("$as_user cd $path; /usr/bin/git pull")
         if [ "$?" -ne 0 ];
         then
             /bin/echo "--------------------"
