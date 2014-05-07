@@ -139,7 +139,7 @@ then
     /bin/echo "+ Updating git repositories..."
 
     as_user=''
-    if [ ! -z $user];
+    if [ ! -z $user ];
     then
         as_user="su - $user -c"
     fi
