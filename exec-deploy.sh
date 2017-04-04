@@ -21,7 +21,8 @@ fi
 
 conf_file=$1
 pid_file=/tmp/exec-deploy.pid
-local_revision=$HOME/.sig-deploy/last-revision
+conf_base_name=$(/bin/basename $conf_file)
+local_revision=$HOME/.sig-deploy/last-revision$config_file
 deploy_revision=$HOME/.sig-deploy/deploy-revision
 
 # +---------------------------------------------------------------------------+
