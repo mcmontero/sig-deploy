@@ -93,6 +93,7 @@ fi
 # +---------------------------------------------------------------------------+
 
 /bin/echo "+ Pulling signal file..."
+/bin/sleep $((RANDOM % 3))
 
 /bin/rm -f $deploy_revision > /dev/null 2>&1
 
