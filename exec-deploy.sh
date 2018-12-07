@@ -143,7 +143,7 @@ fi
 
 if [[ $local_revision_num -eq ${contents[0]} ]];
 then
-    /bin/echo "    revision # has not changed, nothing to do"
+    /bin/echo "        revision # has not changed, nothing to do"
     clean_up
     shutdown
 fi
