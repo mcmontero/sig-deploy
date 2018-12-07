@@ -101,6 +101,7 @@ fi
 if [ -f $local_signal_file ];
 then
     /bin/echo "+ Processing local signal file..."
+    /bin/echo "0" > $deploy_revision
 
     contents=($(<$deploy_revision))
     content_len=${#contents[@]}
@@ -208,7 +209,10 @@ fi
 
 # +---------------------------------------------------------------------------+
 
-/bin/echo ${contents[0]} > $local_revision
+if [ -f $local_signal_file ];
+then
+    /bin/echo ${contents[0]} > $local_revision
+fi
 
 # +---------------------------------------------------------------------------+
 
