@@ -57,6 +57,11 @@ function clean_up
 {
     /bin/echo "+ Cleaning up..."
 
+    if [ -f $local_signal_file ];
+    then
+        /bin/rm -f $local_signal_file
+    fi
+
     /bin/rm -f $deploy_revision
     /bin/rm -f $pid_file
 }
