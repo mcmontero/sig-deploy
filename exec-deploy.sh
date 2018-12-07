@@ -103,7 +103,7 @@ then
     /bin/echo "+ Processing local signal file..."
     /bin/echo "0" > $deploy_revision
 
-    contents=($(<$deploy_revision))
+    contents=($(<$local_signal_file))
     content_len=${#contents[@]}
 else
     /bin/echo "+ Pulling signal file..."
