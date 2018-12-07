@@ -24,6 +24,7 @@ pid_file=/tmp/exec-deploy.pid
 conf_base_name=$(/bin/basename $conf_file)
 local_revision=$HOME/.sig-deploy/last-revision-$conf_base_name
 deploy_revision=$HOME/.sig-deploy/deploy-revision
+local_signal_file=/tmp/EXEC-DEPLOY-SIGNAL
 
 # +---------------------------------------------------------------------------+
 # | INCLUDES                                                                  |
@@ -92,33 +93,41 @@ fi
 
 # +---------------------------------------------------------------------------+
 
-/bin/echo "+ Pulling signal file..."
-/bin/sleep $((RANDOM % 3))
-
-/bin/rm -f $deploy_revision > /dev/null 2>&1
-
-/bin/echo "    output from transfer command is:"
-/bin/echo "--------------------"
-command="$s3cmd -c $s3cfg --force \
-            get s3://$bucket_name/$file_name \
-            $deploy_revision"
-$command
-if [ "$?" -ne 0 ];
+if [[ ! -z "$local_signal_file" ]];
 then
-    /bin/echo "--------------------"
-    /bin/echo "    failed"
-    send_alert "Pulling Signal File" $alert
-    exit 1
-else
-    /bin/echo "--------------------"
-    /bin/echo "    succeeded"
-fi
+    /bin/echo "+ Processing local signal file..."
 
-last_ifs="$IFS"
-IFS=$'\n'
-contents=($(<$deploy_revision))
-IFS="$last_ifs"
-content_len=${#contents[@]}
+    contents=($(<$deploy_revision))
+    content_len=${#contents[@]}
+else
+    /bin/echo "+ Pulling signal file..."
+    /bin/sleep $((RANDOM % 3))
+
+    /bin/rm -f $deploy_revision > /dev/null 2>&1
+
+    /bin/echo "    output from transfer command is:"
+    /bin/echo "--------------------"
+    command="$s3cmd -c $s3cfg --force \
+                get s3://$bucket_name/$file_name \
+                $deploy_revision"
+    $command
+    if [ "$?" -ne 0 ];
+    then
+        /bin/echo "--------------------"
+        /bin/echo "    failed"
+        send_alert "Pulling Signal File" $alert
+        exit 1
+    else
+        /bin/echo "--------------------"
+        /bin/echo "    succeeded"
+    fi
+
+    last_ifs="$IFS"
+    IFS=$'\n'
+    contents=($(<$deploy_revision))
+    IFS="$last_ifs"
+    content_len=${#contents[@]}
+fi
 
 # +---------------------------------------------------------------------------+
 
