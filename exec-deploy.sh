@@ -209,7 +209,7 @@ fi
 
 # +---------------------------------------------------------------------------+
 
-if [ -f $local_signal_file ];
+if [ ! -f $local_signal_file ];
 then
     /bin/echo ${contents[0]} > $local_revision
 fi
