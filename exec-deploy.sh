@@ -98,7 +98,7 @@ fi
 
 # +---------------------------------------------------------------------------+
 
-if [[ ! -z "$local_signal_file" ]];
+if [ -f $local_signal_file ];
 then
     /bin/echo "+ Processing local signal file..."
 
