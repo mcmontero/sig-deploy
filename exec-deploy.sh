@@ -137,7 +137,7 @@ fi
 
 # +---------------------------------------------------------------------------+
 
-/bin/echo "Comparing revisions..."
+/bin/echo "+ Comparing revisions..."
 /bin/echo "    local revision #$local_revision_num"
 /bin/echo "    deploy revision #${contents[0]}"
 
@@ -191,7 +191,7 @@ then
         command="$post_action"
     fi
 
-    /bin/echo "Executing post action..."
+    /bin/echo "+ Executing post action..."
     /bin/echo "    output from post action is:"
     /bin/echo "--------------------"
     $command
